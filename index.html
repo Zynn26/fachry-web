@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fachry — Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Simplifica&display=swap" rel="stylesheet">
+  <style>
+@font-face {
+  font-family: 'Simplifica';
+  src: url('SIMPLIFICA Typeface.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  background-color: #000;
+  font-family: 'Simplifica', sans-serif;
+  overflow-x: hidden;
+}
+.gradient-text {
+  background: linear-gradient(to right, #9f7aea, #4299e1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.fade-typewriter {
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+.menu-panel, .profile-page, .gallery-page {
+  transition: transform 0.4s ease-in-out;
+}
+.overlay-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+  </style>
+</head>
+<body class="text-white relative">
+
+<header class="flex justify-between items-center p-6 relative z-20">
+  <div class="text-lg font-bold">M.FACHRY AKBAR</div>
+  <div class="relative z-20">
+    <button id="menu-btn" class="text-sm bg-gray-800 px-4 py-2 rounded-md">MENU</button>
+  </div>
+</header>
+
+<div id="menu-panel" class="fixed top-0 right-0 h-full w-64 bg-gray-900 text-white transform translate-x-full menu-panel z-20 shadow-lg flex flex-col justify-between">
+  <div class="p-6 space-y-6">
+    <nav class="flex flex-col space-y-4">
+      <button id="profile-link" class="text-left hover:underline">My Profile</button>
+      <a href="#career" class="hover:underline">My Career</a>
+      <a href="#game" class="hover:underline">Game Career</a>
+      <button id="gallery-link" class="text-left hover:underline">Photography Gallery</button>
+    </nav>
+  </div>
+</div>
+
+<main id="main-page" class="flex flex-col items-center justify-center min-h-screen px-6 bg-cover bg-center relative overlay-bg" style="background-image: url('Background_web.jpg');">
+  <p class="text-sm text-gray-300 max-w-sm z-10 mb-4 text-center">
+    Hello there! 👋 my name is Fachry and I’m a student passionate about building my life.
+  </p>
+  <h1 class="text-5xl font-extrabold fade-typewriter text-center relative z-10">
+    Welcome to my first <span class="gradient-text">Web</span>
+  </h1>
+</main>
+
+<section id="profile-page" class="fixed top-0 left-0 w-full h-full bg-white text-black transform translate-x-full profile-page z-10 flex items-center justify-center px-10">
+  <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+    <img src="PP Web.jpg" alt="Profile Photo" class="rounded-xl shadow-md object-cover h-96 w-full">
+    <div>
+      <h2 class="text-2xl font-bold mb-4">Hello!</h2>
+      <p class="text-xl font-semibold mb-2">My name is Fachry — you can call me Zynn</p>
+      <p class="text-sm text-gray-700 leading-relaxed">
+        I'm 20 years old, born in 2005. I like playing games, exploring the world, fishing, and going to the beach.
+      </p>
+      <div class="mt-6">
+        <button id="back-btn" class="text-sm px-4 py-2 rounded bg-black text-white">Back</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery-page" class="fixed top-0 left-0 w-full h-full bg-white text-black transform translate-x-full gallery-page z-10 flex flex-col items-center justify-center px-6 py-12 overflow-y-auto">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-8">Photography Gallery</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+      <img src="photo1.png" alt="Photo 1" class="rounded shadow object-cover w-full aspect-square cursor-pointer" onclick="openModal(this.src)">
+      <img src="photo2.jpg" alt="Photo 2" class="rounded shadow object-cover w-full aspect-square cursor-pointer" onclick="openModal(this.src)">
+      <img src="photo3.jpg" alt="Photo 3" class="rounded shadow object-cover w-full aspect-square cursor-pointer" onclick="openModal(this.src)">
+      <img src="photo4.jpg" alt="Photo 4" class="rounded shadow object-cover w-full aspect-square cursor-pointer" onclick="openModal(this.src)">
+      <img src="photo5.jpg" alt="Photo 5" class="rounded shadow object-cover w-full aspect-square cursor-pointer" onclick="openModal(this.src)">
+    </div>
+    <div class="mt-6 text-center">
+      <button id="gallery-back-btn" class="text-sm px-4 py-2 rounded bg-black text-white">Back</button>
+    </div>
+  </div>
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-75 hidden items-center justify-center z-50">
+    <div class="relative max-w-full max-h-full flex justify-center items-center">
+      <button id="closeBtn" class="absolute top-2 right-2 text-white text-3xl font-bold cursor-pointer">×</button>
+      <img id="modal-img" src="" alt="Expanded Photo" class="rounded max-w-[90vw] max-h-[90vh]">
+    </div>
+  </div>
+</section>
+
+<footer class="absolute bottom-4 right-6 text-2xl space-x-3">
+  <span>🤖</span>
+  <span>🐦</span>
+  <span>💼</span>
+  <span>📸</span>
+  <span>🔗</span>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const menuPanel = document.getElementById('menu-panel');
+  const profileLink = document.getElementById('profile-link');
+  const profilePage = document.getElementById('profile-page');
+  const mainPage = document.getElementById('main-page');
+  const backBtn = document.getElementById('back-btn');
+  const galleryLink = document.getElementById('gallery-link');
+  const galleryPage = document.getElementById('gallery-page');
+  const galleryBackBtn = document.getElementById('gallery-back-btn');
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modal-img');
+  const closeBtn = document.getElementById('closeBtn');
+
+  let menuHideTimeout;
+
+  menuBtn.addEventListener('click', () => menuPanel.classList.remove('translate-x-full'));
+  menuPanel.addEventListener('mouseenter', () => clearTimeout(menuHideTimeout));
+  menuPanel.addEventListener('mouseleave', () => menuHideTimeout = setTimeout(() => menuPanel.classList.add('translate-x-full'), 2000));
+
+  profileLink.addEventListener('click', () => {
+    menuPanel.classList.add('translate-x-full');
+    mainPage.classList.add('translate-x-full');
+    profilePage.classList.remove('translate-x-full');
+    galleryPage.classList.add('translate-x-full');
+    menuBtn.style.display = 'none';
+  });
+
+  backBtn.addEventListener('click', () => {
+    profilePage.classList.add('translate-x-full');
+    mainPage.classList.remove('translate-x-full');
+    menuBtn.style.display = 'inline-block';
+  });
+
+  galleryLink.addEventListener('click', () => {
+    menuPanel.classList.add('translate-x-full');
+    mainPage.classList.add('translate-x-full');
+    profilePage.classList.add('translate-x-full');
+    galleryPage.classList.remove('translate-x-full');
+    menuBtn.style.display = 'none';
+  });
+
+  galleryBackBtn.addEventListener('click', () => {
+    galleryPage.classList.add('translate-x-full');
+    mainPage.classList.remove('translate-x-full');
+    menuBtn.style.display = 'inline-block';
+  });
+
+  function openModal(src) {
+    modalImg.src = src;
+    modal.classList.remove('hidden');
+  }
+
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal || e.target === closeBtn) {
+      modal.classList.add('hidden');
+    }
+  });
+
+  closeBtn.addEventListener('click', function() {
+    modal.classList.add('hidden');
+  });
+</script>
+
+</body>
+</html>
